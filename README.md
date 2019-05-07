@@ -41,8 +41,8 @@ Furthermore, you need to download the following database to the specific directo
 
 Or you can download the above database and softwares from BGI Cloud Drive:
 
-1. tools Link: https://pan.genomics.cn/ucdisk/s/2iU3ya
-2. database Link: https://pan.genomics.cn/ucdisk/s/RZFRFz
+1. tools Link: https://pan.genomics.cn/ucdisk/s/B7Nryq
+2. database Link: https://pan.genomics.cn/ucdisk/s/vmU3aq
 
 Usage
 -------
@@ -50,7 +50,8 @@ Usage
 
 2. Run the automatical delivery script.
 
-        sh work.sh
+        stLFR path
+        stLFR path --ref hs37d5
 
 Result
 -------
