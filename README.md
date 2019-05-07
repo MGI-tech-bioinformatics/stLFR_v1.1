@@ -11,7 +11,7 @@ Download source code package from https://github.com/MGI-tech-bioinformatics/stL
 Updates 
 -------
 May 6, 2019
-There are severl updates in stLFR_v1.1:
+There are several updates in stLFR_v1.1 comparing with v1:
 1. Users could use an alternative reference type (hg19 or hs37d5) in stLFR_v1.1 by --ref option instead of only hg19.
 2. Updated CNV and SV detection tools are implied in stLFR_v1.1 for decreasing false discovery rate.
 3. Three figures, illustrating stLFR fragment distribution and coverage, are added.
