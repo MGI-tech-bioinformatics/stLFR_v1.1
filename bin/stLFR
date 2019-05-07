@@ -1,0 +1,135 @@
+#!/usr/bin/perl
+
+#===============================================================================
+#   FileName: stLFR
+#   Author  : raojunhua@genomics.cn
+#   Version : 0.2
+#   Date    : 2019-03-25
+#   Description: The main program of stLFR workflow on hg19/hs37d5.
+#===============================================================================
+
+use strict;
+use warnings;
+use FindBin qw($Bin);
+use Cwd qw(abs_path);
+use File::Basename;
+use Getopt::Long;
+use Pod::Usage;
+use lib "$Bin/../lib/perl5";
+use MyModule::GlobalVar qw($REF_H_DBPATH);
+
+my($list, $outdir, $help, $cpu, $reftype);
+GetOptions(
+  "outdir:s"   => \$outdir,
+  "help|h"     => \$help,
+  "cpu:i"      => \$cpu,
+  "ref:s"      => \$reftype,
+);
+pod2usage(-exitval => 1, -verbose => 1) if($help || @ARGV < 1);
+($list, ) = @ARGV;
+$list = abs_path $list;
+
+#===============================================================================
+#   Set the default values of options
+#===============================================================================
+$outdir   ||= "./";
+$outdir     = abs_path $outdir;
+$cpu      ||= 70;
+$reftype  ||= "hs37d5";
+
+#===============================================================================
+#   Check software
+#===============================================================================
+# s1 : none
+# s2 : soapnuke
+# s3 : bwa samtools java picard
+# s4 : samtools
+# s5 : java gatk4 bgzip tabix python2
+# s6 : HapCUT2-master python3
+# s7 : lfrcnv
+# s8 : samtools
+# s9 : samtools bam2depth java picard R
+# check bwa     : git clone https://github.com/lh3/bwa.git + cd bwa + make
+# check picard  : git clone https://github.com/broadinstitute/picard.git + JAVA_HOME= + ./gradlew shadowJar
+# check python2 : https://www.python.org/ftp/python/2.7.14/Python-2.7.14.tgz + ./configure + make
+# check python3 : https://www.python.org/ftp/python/3.6.4/Python-3.6.4.tgz + 
+# check vcffilter : setuptools + vcf + Bin/5.bam_GATK/vcffilter.py
+# check R : zlib + ./configure + make
+
+#===============================================================================
+#   Create the analytic directory
+#===============================================================================
+`rm -fr $outdir/shell` if(-d "$outdir/shell");
+`mkdir -p $outdir/shell`;
+
+#===============================================================================
+#   Generate analytic scripts
+#===============================================================================
+system("perl $Bin/1.fq_BarcodeSplit/fqbs_main.pl -i $list -o $outdir/1.fq_BarcodeSplit -s $outdir/shell -cpu $cpu");
+system("perl $Bin/2.fq_Filter/fqf_main.pl -i $list -o $outdir/2.fq_Filter -s $outdir/shell -cpu $cpu -f $outdir/1.fq_BarcodeSplit");
+system("perl $Bin/3.fq_AlignSortMarkdup/fqasm_main.pl -i $list -o $outdir/3.bam_Align -s $outdir/shell -cpu $cpu -f $outdir/2.fq_Filter -ref $reftype");
+system("perl $Bin/4.bam_Split/bs_main.pl -i $list -o $outdir/3.bam_Align -s $outdir/shell -cpu $cpu -f $outdir/3.bam_Align -ref $reftype");
+system("perl $Bin/5.bam_GATK/bg_main.pl -i $list -o $outdir/4.vcf_GATK -s $outdir/shell -cpu $cpu -f $outdir/3.bam_Align -ref $reftype");
+system("perl $Bin/6.bamvcf_HaplotypeAssembly/ha_main.pl -i $list -o $outdir/5.phase_HaplotypeAssembly -s $outdir/shell -cpu $cpu -fb $outdir/3.bam_Align -fv $outdir/4.vcf_GATK -ref $reftype");
+system("perl $Bin/7.bamvcfhap_CNV/cnv_main.pl -i $list -o $outdir/6.stLFR_CNV -s $outdir/shell -cpu $cpu -fb $outdir/3.bam_Align -fv $outdir/4.vcf_GATK -fp $outdir/5.phase_HaplotypeAssembly_withindel -ref $reftype");
+system("perl $Bin/8.bam_SV/sv_main.pl -i $list -o $outdir/7.stLFR_SV -s $outdir/shell -cpu $cpu -fb $outdir/3.bam_Align");
+system("perl $Bin/9.report_Stat/stat_main.pl -i $list -o $outdir/8.report_Stat -s $outdir/shell -cpu $cpu -fb $outdir/3.bam_Align -fv $outdir/4.vcf_GATK -ref $reftype -fc $outdir/6.stLFR_CNV -fs $outdir/7.stLFR_SV");
+
+#===============================================================================
+#   Run workflow
+#===============================================================================
+#`sh $outdir/shell/pipeline.sh 1>$outdir/shell/pipeline.sh.o 2>$outdir/shell/pipeline.sh.e `;
+
+__END__
+
+=pod
+
+=head1 VERSION
+
+v1.0
+
+=head1 SYNOPSIS
+
+perl stLFR <sample.list> [options]
+
+=head1 ARGUMENTS
+
+=over 8
+
+=item B<sample.list> <file>
+
+ List of input.
+
+ Format: "sample    path     [ barcode ]"
+
+ If one sample have 2 lanes of fastq, there should be two lines in the fqlist file for this sample.
+ There are at least 2 columns separated by blank(s) or tab(s) in each line:
+   the 1st column is sample name, no blank or chinese character, required
+   the 2nd column is the lane path of fastq files, must contain *_1.fq.fqStat.txt, required
+   the 3rd column is the barcode positions [ 101_10,117_10,133_10 ]
+
+=back
+
+=head1 OPTIONS
+
+=over 8
+
+=item B<--outdir> <Path>
+
+Output path. [./]
+
+=item B<--ref> <hs37d5>
+
+Human reference version <hg19 | hs37d5>. [hs37d5]
+
+=item B<--cpu> <70>
+
+CPU number. [70]
+
+=item B<--help|-h>
+
+Print this information.
+
+=back
+
+=cut

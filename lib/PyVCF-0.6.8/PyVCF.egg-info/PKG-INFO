@@ -1,0 +1,27 @@
+Metadata-Version: 1.1
+Name: PyVCF
+Version: 0.6.8
+Summary: Variant Call Format (VCF) parser for Python
+Home-page: https://github.com/jamescasbon/PyVCF
+Author: James Casbon and @jdoughertyii
+Author-email: casbon@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Keywords: bioinformatics
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: BSD License
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Cython
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics

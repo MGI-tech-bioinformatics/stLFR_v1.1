@@ -1,0 +1,11 @@
+hs37d5.fa	         reference/hs37d5/hs37d5.fa
+hs37d5.chrom.size  reference/hs37d5/hs37d5.chrom.sizes
+hs37d5.non         reference/hs37d5/hs37d5.nonN.region
+hs37d5.dbsnp       dbsnp/hs37d5.dbsnp.vcf
+
+hg19.fa            reference/hg19/hg19.fa
+hg19.chrom.size    reference/hg19/hg19.chrom.sizes
+hg19.non           reference/hg19/hg19.nonN.region
+hg19.dbsnp         dbsnp/hg19.dbsnp.vcf
+
+barcodelist        barcode/barcode.list
