@@ -11,7 +11,7 @@ Download source code package from https://github.com/MGI-tech-bioinformatics/stL
 Updates 
 -------
 May 6, 2019
-There are severl updates in stLFR_v1.1:
+There are several updates in stLFR_v1.1 comparing with v1:
 1. Users could use an alternative reference type (hg19 or hs37d5) in stLFR_v1.1 by --ref option instead of only hg19.
 2. Updated CNV and SV detection tools are implied in stLFR_v1.1 for decreasing false discovery rate.
 3. Three figures, illustrating stLFR fragment distribution and coverage, are added.
@@ -41,8 +41,8 @@ Furthermore, you need to download the following database to the specific directo
 
 Or you can download the above database and softwares from BGI Cloud Drive:
 
-1. tools Link: https://pan.genomics.cn/ucdisk/s/2iU3ya
-2. database Link: https://pan.genomics.cn/ucdisk/s/RZFRFz
+1. tools Link: https://pan.genomics.cn/ucdisk/s/B7Nryq
+2. database Link: https://pan.genomics.cn/ucdisk/s/vmU3aq
 
 Usage
 -------
@@ -50,7 +50,8 @@ Usage
 
 2. Run the automatical delivery script.
 
-        sh work.sh
+        stLFR path
+        stLFR path --ref hs37d5
 
 Result
 -------
