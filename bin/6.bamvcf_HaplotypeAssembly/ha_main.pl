@@ -55,7 +55,8 @@ while(<LIST>){
   $line = 0;
 
   print S2 "rm $result\_withindel/$info[0]/$info[0].*\n";
-  $line += 1;
+  print S2 "rm $result\_withoutindel/$info[0]/$info[0].*\n";
+  $line += 2;
 
   open FAI,"$reference.fai";
   my (@w_hap, @wo_hap, @vcf, @w_frag, @wo_frag, @pvcf) = () x 6;
@@ -77,8 +78,10 @@ while(<LIST>){
     print S1 "$extractHAIRS --10X 1 --bam $bamdir/$info[0]/split/$info[0].sort.rmdup.$fai[0].bam --VCF $vcfdir/$info[0]/split/$info[0].gatk4.$fai[0].vcf --out $result\_withoutindel/$info[0]/tempData/1.$info[0].$fai[0].unlinked_frag\n";
     print S1 "$python3 $linkfragment --bam $bamdir/$info[0]/split/$info[0].sort.rmdup.$fai[0].bam --vcf $vcfdir/$info[0]/split/$info[0].gatk4.$fai[0].vcf --fragments $result\_withoutindel/$info[0]/tempData/1.$info[0].$fai[0].unlinked_frag --out $result\_withoutindel/$info[0]/split/linked_fragment.$info[0].$fai[0] -d $linkdist\n";
     print S1 "$hapcut2 --nf 1 --fragments $result\_withoutindel/$info[0]/split/linked_fragment.$info[0].$fai[0] --vcf $vcfdir/$info[0]/split/$info[0].gatk4.$fai[0].vcf --output $result\_withoutindel/$info[0]/split/hapblock_$info[0]\_$fai[0]\n";
+    # add for snp 20190513
+    print S1 "less $result\_withoutindel/$info[0]/split/hapblock_$info[0]\_$fai[0] |perl -e 'while(<>){chomp;\@a=split;next if !/^BLOCK/ && (length(\$a[5]) > 1 || length(\$a[6]) > 1); print \"\$_\\n\"; }' > $result\_withoutindel/$info[0]/split/hapblock_$info[0]\_$fai[0].snp\n";
     print S1 "echo $fai[0] > $result\_withoutindel/$info[0]/tempData/2.$info[0].$fai[0].hapcut_stat.txt\n";
-    print S1 "$python3 $compareblock -h1 $result\_withoutindel/$info[0]/split/hapblock_$info[0]\_$fai[0] -v1 $vcfdir/$info[0]/split/$info[0].gatk4.$fai[0].vcf -f1 $result\_withoutindel/$info[0]/split/linked_fragment.$info[0].$fai[0] -pv $phasedvcf.$fai[0].vcf -c $chromsize >> $result\_withoutindel/$info[0]/tempData/2.$info[0].$fai[0].hapcut_stat.txt\n";
+    print S1 "$python3 $compareblock -h1 $result\_withoutindel/$info[0]/split/hapblock_$info[0]\_$fai[0].snp -v1 $vcfdir/$info[0]/split/$info[0].gatk4.$fai[0].vcf -f1 $result\_withoutindel/$info[0]/split/linked_fragment.$info[0].$fai[0] -pv $phasedvcf.$fai[0].vcf -c $chromsize >> $result\_withoutindel/$info[0]/tempData/2.$info[0].$fai[0].hapcut_stat.txt\n";
 
     # cat result
     print S2 "cat $result\_withindel/$info[0]/split/linked_fragment.$info[0].$fai[0] >> $result\_withindel/$info[0]/$info[0].linked_fragment\n";
@@ -92,7 +95,7 @@ while(<LIST>){
     # get chromosome array
     push @w_hap,   "$result\_withindel/$info[0]/split/hapblock_$info[0]\_$fai[0]";
     push @w_frag,  "$result\_withindel/$info[0]/split/linked_fragment.$info[0].$fai[0]";
-    push @wo_hap,  "$result\_withoutindel/$info[0]/split/hapblock_$info[0]\_$fai[0]";
+    push @wo_hap,  "$result\_withoutindel/$info[0]/split/hapblock_$info[0]\_$fai[0].snp";
     push @wo_frag, "$result\_withoutindel/$info[0]/split/linked_fragment.$info[0].$fai[0]";
     push @vcf,     "$vcfdir/$info[0]/split/$info[0].gatk4.$fai[0].vcf";
     push @pvcf,    "$phasedvcf.$fai[0].vcf";
