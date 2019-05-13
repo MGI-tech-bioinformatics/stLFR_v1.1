@@ -14,7 +14,7 @@ May 6, 2019
 There are several updates in stLFR_v1.1 comparing with v1:
 1. Users could use an alternative reference type (hg19 or hs37d5) in stLFR_v1.1 by --ref option instead of only hg19.
 2. Updated CNV and SV detection tools are implied in stLFR_v1.1 for decreasing false discovery rate.
-3. Three figures, illustrating stLFR fragment distribution and coverage, are added.
+3. Three figures used for illustrating stLFR fragment distribution and coverage are added.
 4. NA12878 benchmark VCF by GIAB is used for haplotype phasing error calculation.
 
 Download/Install
