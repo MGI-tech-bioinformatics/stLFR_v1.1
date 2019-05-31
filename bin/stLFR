@@ -78,7 +78,7 @@ system("perl $Bin/9.report_Stat/stat_main.pl -i $list -o $outdir/8.report_Stat -
 #===============================================================================
 #   Run workflow
 #===============================================================================
-#`sh $outdir/shell/pipeline.sh 1>$outdir/shell/pipeline.sh.o 2>$outdir/shell/pipeline.sh.e `;
+`sh $outdir/shell/pipeline.sh 1>$outdir/shell/pipeline.sh.o 2>$outdir/shell/pipeline.sh.e `;
 
 __END__
 
