@@ -48,9 +48,10 @@ Usage
 -------
 1. Make sure 'path' file on a right format, you can refer to 'path' file in the example.
 
-2. Run the automatical delivery script.
+2. Run the automatical delivery script. Default reference: [hs37d5]
 
         stLFR path
+        or
         stLFR path --ref hs37d5
 
 Result
