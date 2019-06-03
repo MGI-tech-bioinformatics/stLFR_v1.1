@@ -46,13 +46,37 @@ Or you can download the above database and softwares from BGI Cloud Drive:
 
 Usage
 -------
-1. Make sure 'path' file on a right format, you can refer to 'path' file in the example.
+1. Make sure 'sample.list' file on a right format, you can refer to 'path' file in the example.
 
 2. Run the automatical delivery script. Default reference: [hs37d5]
 
-        stLFR path
-        or
-        stLFR path --ref hs37d5
+   perl stLFR <sample.list> [options]
+
+Arguments:
+----------
+sample.list <file>
+     List of input.
+
+     Format: "sample    path     [ barcode ]"
+
+     If one sample have 2 lanes of fastq, there should be two lines in the fqlist file for this sample.
+     There are at least 2 columns separated by blank(s) or tab(s) in each line:
+     The 1st column is sample name, no blank or chinese character, required
+     The 2nd column is the lane path of fastq files, must contain *_1.fq.fqStat.txt, required
+     The 3rd column is the barcode positions [ 101_10,117_10,133_10 ]
+
+Options:
+    --outdir <Path>
+            Output path. [./]
+
+    --ref <hs37d5>
+            Human reference version <hg19 | hs37d5>. [hs37d5]
+
+    --cpu <70>
+            CPU number. [70]
+
+    --help|-h
+            Print this information.
 
 Result
 -------
