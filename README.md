@@ -57,15 +57,15 @@ Main progarm arguments:
 
 sample.list <file>:
    
-     List of input.
+    List of input.
 
-     Format: "sample    path     [ barcode ]"
+    Format: "sample    path     [ barcode ]"
 
-     If one sample have 2 lanes of fastq, there should be two lines in the fqlist file for this sample.
-     There are at least 2 columns separated by blank(s) or tab(s) in each line:
-     The 1st column is sample name, no blank or chinese character, required
-     The 2nd column is the lane path of fastq files, must contain *_1.fq.fqStat.txt, required
-     The 3rd column is the barcode positions [ 101_10,117_10,133_10 ]
+    If one sample have 2 lanes of fastq, there should be two lines in the fqlist file for this sample.
+    There are at least 2 columns separated by blank(s) or tab(s) in each line:
+    The 1st column is sample name, no blank or chinese character, required
+    The 2nd column is the lane path of fastq files, must contain *_1.fq.fqStat.txt, required
+    The 3rd column is the barcode positions [ 101_10,117_10,133_10 ]
 
 Options:
 
