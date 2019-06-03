@@ -52,10 +52,10 @@ Usage
 
    perl stLFR <sample.list> [options]
 
-Arguments:
+Main progarm arguments:
 ----------
 
-sample.list <file>
+sample.list <file>:
    
      List of input.
 
