@@ -54,7 +54,9 @@ Usage
 
 Arguments:
 ----------
+
 sample.list <file>
+   
      List of input.
 
      Format: "sample    path     [ barcode ]"
@@ -66,6 +68,7 @@ sample.list <file>
      The 3rd column is the barcode positions [ 101_10,117_10,133_10 ]
 
 Options:
+
     --outdir <Path>
             Output path. [./]
 
