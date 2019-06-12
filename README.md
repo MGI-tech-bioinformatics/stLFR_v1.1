@@ -44,6 +44,12 @@ Or you can download the above database and softwares from BGI Cloud Drive:
 1. tools Link: https://pan.genomics.cn/ucdisk/s/B7Nryq
 2. database Link: https://pan.genomics.cn/ucdisk/s/vmU3aq
 
+Two Demo stLFR libraries for test, and every library consists two lanes.
+Libraries Link:
+
+T0001-2: ftp://ftp.cngb.org/pub/CNSA/CNP0000387/CNS0057111/
+T0001-4: ftp://ftp.cngb.org/pub/CNSA/CNP0000387/CNS0094773/
+
 Usage
 -------
 1. Make sure 'sample.list' file on a right format, you can refer to 'path' file in the example.
