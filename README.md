@@ -107,7 +107,7 @@ After all analysis processes ending, you will get these files below:
 
 Additional Information
 -------
-1. If user has "Permission denied" problem in the process of running，you could use the command "chmod +x -R stLFR_v1.1-master/tools" to get executable permission of tools.
+1. If user has "Permission denied" problem in the process of running，you can use the command "chmod +x -R stLFR_v1.1-master/tools" to get executable permission of tools.
 
 
 License
