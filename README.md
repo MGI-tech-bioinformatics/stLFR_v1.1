@@ -105,6 +105,9 @@ After all analysis processes ending, you will get these files below:
 12. Fragment length distribution figure: *.fraglen_distribution_min5000.pdf
 13. Fragment per barcode distribution figure: *.frag_per_barcode.pdf
 
+Additional Information
+-------
+1. If user has "Permission denied" problem in the process of running，you could use the command "chmod +x -R stLFR_v1.1-master/tools" to get executable permission of tools.
 
 
 License
